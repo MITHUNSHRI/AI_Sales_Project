@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Sales Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>AI Lead Prediction System</h2>
+
+    <input id="eng" placeholder="Engagement Score">
+
+    <input id="size" placeholder="Company Size">
+
+    <input id="visits" placeholder="Website Visits">
+
+    <button onclick="send()">Predict</button>
+
+    <h3 id="result"></h3>
+
+</div>
+
+<script>
+
+function send(){
+
+    fetch("http://127.0.0.1:5000/predict",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            engagement:Number(document.getElementById("eng").value),
+            company_size:Number(document.getElementById("size").value),
+            visits:Number(document.getElementById("visits").value)
+        })
+    })
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        document.getElementById("result").innerText =
+        data.prediction;
+
+    })
+
+    .catch(err=>{
+        alert("Server not running!");
+    })
+}
+
+</script>
+
+</body>
+</html>
