@@ -27,8 +27,11 @@
 
 function send(){
 
-    fetch("http://127.0.0.1:5000/predict",{
+    alert("Backend works only on local PC. Please run Flask.");
+return;
+
         method:"POST",
+        
         headers:{
             "Content-Type":"application/json"
         },
